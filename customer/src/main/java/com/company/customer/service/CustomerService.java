@@ -6,8 +6,13 @@ import com.company.customer.controller.Request.CustomerResgistrationRequest;
 import com.company.customer.model.Customer;
 import com.company.customer.repository.CustomerRepository;
 
+import lombok.AllArgsConstructor;
+
 @Service
-public record CustomerService(CustomerRepository customerRepository){
+@AllArgsConstructor
+public class CustomerService {
+
+    private final CustomerRepository customerRepository;
 
     public void registerCustomer(CustomerResgistrationRequest request) {
         Customer customer = Customer.builder()
