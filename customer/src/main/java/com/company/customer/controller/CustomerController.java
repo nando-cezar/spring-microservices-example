@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerController {
 
     private final CustomerService customerService;
+    
     @PostMapping
     public void registerCustomer(@RequestBody CustomerResgistrationRequest customerResgistrationRequest) {
         log.info("new customer registration {}", customerResgistrationRequest);

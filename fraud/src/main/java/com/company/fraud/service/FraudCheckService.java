@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class FraudCheckService {
-    
+     
     private final FraudCheckHistoryRepository fraudCheckHistoryRepository;
 
     public boolean isFraudlentCustomer(Integer customerId){

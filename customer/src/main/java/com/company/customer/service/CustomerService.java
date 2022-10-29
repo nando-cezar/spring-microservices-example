@@ -1,8 +1,10 @@
 package com.company.customer.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.company.customer.controller.Request.CustomerResgistrationRequest;
+import com.company.customer.controller.Response.FraudCheckResponse;
 import com.company.customer.model.Customer;
 import com.company.customer.repository.CustomerRepository;
 
@@ -12,7 +14,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CustomerService {
 
-    private final CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository; 
+    private final RestTemplate restTemplate;
 
     public void registerCustomer(CustomerResgistrationRequest request) {
         Customer customer = Customer.builder()
@@ -23,8 +26,18 @@ public class CustomerService {
 
         //todo: check if email valid
         //todo: check if email not token
-        //todo: store customer in db
-        customerRepository.save(customer);
+        customerRepository.saveAndFlush(customer);
+        //todo: check if fraudster
+        FraudCheckResponse  fraudCheckResponse = restTemplate.getForObject(
+            "http://localhost:8081/api/v1/fraud-check/{customerId}", 
+            FraudCheckResponse.class,
+            customer.getId()
+        );
+        
+        if(fraudCheckResponse.isFraudster()){
+            throw new IllegalStateException("fraudster");
+        }
+        //todo: send notification
     }
 
 }
