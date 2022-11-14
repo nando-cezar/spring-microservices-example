@@ -1,4 +1,4 @@
-package com.company.customer.controller.Request;
+package com.company.customer.controller.request;
 
 public record CustomerResgistrationRequest(
     Integer id,

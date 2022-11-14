@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.customer.controller.Request.CustomerResgistrationRequest;
+import com.company.customer.controller.request.CustomerResgistrationRequest;
 import com.company.customer.service.CustomerService;
 
 import lombok.AllArgsConstructor;

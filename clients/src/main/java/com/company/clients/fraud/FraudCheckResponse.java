@@ -1,4 +1,4 @@
-package com.company.fraud.controller.Response;
+package com.company.clients.fraud;
 
 public record FraudCheckResponse(Boolean isFraudster) {
     

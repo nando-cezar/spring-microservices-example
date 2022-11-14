@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.fraud.controller.Response.FraudCheckResponse;
+import com.company.clients.fraud.FraudCheckResponse;
 import com.company.fraud.service.FraudCheckService;
 
 import lombok.AllArgsConstructor;
