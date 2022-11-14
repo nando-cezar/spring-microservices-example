@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch NotificationApplication",
+            "request": "launch",
+            "mainClass": "com.company.notification.NotificationApplication",
+            "projectName": "notification"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

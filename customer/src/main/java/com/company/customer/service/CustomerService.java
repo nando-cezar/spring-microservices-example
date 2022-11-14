@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import com.company.clients.fraud.FraudCheckResponse;
 import com.company.clients.fraud.FraudClient;
+import com.company.clients.notification.NotificationClient;
+import com.company.clients.notification.NotificationRequest;
 import com.company.customer.controller.request.CustomerResgistrationRequest;
 import com.company.customer.model.Customer;
 import com.company.customer.repository.CustomerRepository;
@@ -15,8 +17,8 @@ import lombok.AllArgsConstructor;
 public class CustomerService {
 
     private final CustomerRepository customerRepository; 
-    //private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
+    private final NotificationClient notificationClient;
 
     public void registerCustomer(CustomerResgistrationRequest request) {
         Customer customer = Customer.builder()
@@ -35,7 +37,14 @@ public class CustomerService {
             throw new IllegalStateException("fraudster");
         }
         
-        //todo: send notification
+        //todo: make it async. i.e add to queue
+        notificationClient.sendNotification(
+            new NotificationRequest(
+                customer.getId(),
+                customer.getEmail(),
+                String.format("Hi %s, welcome to Company...", customer.getFirstName())
+            )
+        );
     }
 
 }
