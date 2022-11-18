@@ -2,9 +2,9 @@ package com.company.customer.service;
 
 import org.springframework.stereotype.Service;
 
+import com.company.amqp.producer.RabbitMQMessageProducer;
 import com.company.clients.fraud.FraudCheckResponse;
 import com.company.clients.fraud.FraudClient;
-import com.company.clients.notification.NotificationClient;
 import com.company.clients.notification.NotificationRequest;
 import com.company.customer.controller.request.CustomerResgistrationRequest;
 import com.company.customer.model.Customer;
@@ -18,7 +18,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository; 
     private final FraudClient fraudClient;
-    private final NotificationClient notificationClient;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public void registerCustomer(CustomerResgistrationRequest request) {
         Customer customer = Customer.builder()
@@ -32,19 +32,23 @@ public class CustomerService {
         customerRepository.saveAndFlush(customer);
 
         FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
-
+ 
         if(fraudCheckResponse.isFraudster()){
             throw new IllegalStateException("fraudster");
         }
         
-        //todo: make it async. i.e add to queue
-        notificationClient.sendNotification(
-            new NotificationRequest(
-                customer.getId(),
-                customer.getEmail(),
-                String.format("Hi %s, welcome to Company...", customer.getFirstName())
-            )
+        NotificationRequest notificationRequest = new NotificationRequest(
+            customer.getId(),
+            customer.getEmail(),
+            String.format("Hi %s, welcome to Company...", customer.getFirstName())
         );
+
+        rabbitMQMessageProducer.publish(
+            notificationRequest, 
+            "internal.exchange", 
+            "internal.notification.routing-key"
+        );
+
     }
 
 }
