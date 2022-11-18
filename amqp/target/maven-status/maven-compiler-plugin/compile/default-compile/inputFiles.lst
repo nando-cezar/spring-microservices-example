@@ -1,2 +1,2 @@
-C:\Users\luissant\OneDrive - BRQ\Documentos\Project\spring-microservices-example\amqp\src\main\java\com\company\amqp\RabbitMQMessageProducer.java
-C:\Users\luissant\OneDrive - BRQ\Documentos\Project\spring-microservices-example\amqp\src\main\java\com\company\amqp\RabbitMQConfig.java
+C:\Users\luissant\OneDrive - BRQ\Documentos\Project\spring-microservices-example\amqp\src\main\java\com\company\amqp\config\RabbitMQConfig.java
+C:\Users\luissant\OneDrive - BRQ\Documentos\Project\spring-microservices-example\amqp\src\main\java\com\company\amqp\producer\RabbitMQMessageProducer.java
