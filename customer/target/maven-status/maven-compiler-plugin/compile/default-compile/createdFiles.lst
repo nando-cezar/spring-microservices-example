@@ -1,8 +1,8 @@
 com\company\customer\model\Customer.class
-com\company\customer\service\CustomerService.class
 com\company\customer\config\CustomerConfig.class
-com\company\customer\model\Customer$CustomerBuilder.class
 com\company\customer\CustomerApplication.class
 com\company\customer\controller\request\CustomerResgistrationRequest.class
 com\company\customer\controller\CustomerController.class
 com\company\customer\repository\CustomerRepository.class
+com\company\customer\service\CustomerService.class
+com\company\customer\model\Customer$CustomerBuilder.class
